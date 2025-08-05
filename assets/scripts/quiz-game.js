@@ -32,6 +32,22 @@ distractors.push("Copenhegen");
 let usedCapitals = [];
 
 function randomBetween(upper) {
-    return Math.trunc(Math.random() * (upper + 1)); 
+    return Math.trunc(Math.random() * (upper + 1));
 }
 
+function generateQuestionAndAnswers() {
+    // Returns question (Country), answer and distractors
+}
+
+function generateCountryAndCapital() {
+    // Returns country and correct capital
+    // Deletes capital and country so they are not used again
+    let countryNumber = randomBetween(countries.length - 1);
+    let country = countries[countryNumber];
+    let capital = capitals[countryNumber];
+    console.log(country, capital);
+}
+
+function generateDistractors(correctCapital) {
+    // Returns three cities that are not the correct capital
+}
