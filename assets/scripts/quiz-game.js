@@ -62,5 +62,12 @@ function generateSingleDistractor(correctCapital) {
 }
 
 function generateDistractors(correctCapital) {
-    // Returns three cities that are not the correct capital
+    let distractorsForThisQuestion = [];
+    while (distractorsForThisQuestion.length !== 3) {
+        let singleDistractor = generateSingleDistractor(correctCapital);
+        if (!distractorsForThisQuestion.includes(singleDistractor)) {
+            distractorsForThisQuestion.push(singleDistractor);
+        }
+    }
+    return distractorsForThisQuestion;
 }
