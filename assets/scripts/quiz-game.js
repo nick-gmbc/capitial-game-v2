@@ -46,9 +46,11 @@ function generateCountryAndCapital() {
     let country = countries[countryNumber];
     let capital = capitals[countryNumber];
     let countryAndMatchingCapital = new Array(2);
+    countries.splice(countryNumber,1);
+    capitals.splice(countryNumber,1);
     countryAndMatchingCapital[0] = country;
     countryAndMatchingCapital[1] = capital;
-    return countryAndMatchingCapital
+    return countryAndMatchingCapital;
 }
 
 function generateDistractors(correctCapital) {
