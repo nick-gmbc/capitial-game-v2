@@ -45,7 +45,10 @@ function generateCountryAndCapital() {
     let countryNumber = randomBetween(countries.length - 1);
     let country = countries[countryNumber];
     let capital = capitals[countryNumber];
-    console.log(country, capital);
+    let countryAndMatchingCapital = new Array(2);
+    countryAndMatchingCapital[0] = country;
+    countryAndMatchingCapital[1] = capital;
+    return countryAndMatchingCapital
 }
 
 function generateDistractors(correctCapital) {
