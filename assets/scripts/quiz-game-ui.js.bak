@@ -1,0 +1,77 @@
+/*global document*/
+/*global generateQuestionAndDistractors*/
+let correctAnswer = "";
+let questionCount = 0;
+let score = 0;
+displayQuestion();
+
+function displayQuestion() {
+    if (questionCount < 10) {
+        let questionAndAnswers = generateQuestionAndDistractors();
+        //console.log(questionAndAnswers);
+        let question = questionAndAnswers[0];
+        correctAnswer = questionAndAnswers[1];
+        let answerOptions = questionAndAnswers[2];
+        let message = "What is the capital city of " + question + "?";
+        document.getElementById("question").innerHTML = message;
+        let optButtonID = "";
+        let optLabID = "";
+        let optNo = 0;
+        while (optNo < 4) {
+            optButtonID = "option" + optNo;
+            //console.log(optionButtonID);
+            document.getElementById(optButtonID).value = answerOptions[optNo];
+            optLabID = "option" + optNo + "Label";
+        // console.log(optionLabelID);
+            //console.log(answerOptions[optionNumber]);
+            document.getElementById(optLabID).innerHTML = answerOptions[optNo];
+            //answerOptions[optionNumber];
+            optNo += 1;
+        }
+        questionCount += 1;
+        document.getElementById("btnCheckAnswer").disabled = false;
+        document.getElementById("btnDisplayQuestion").disabled = true;
+    } else {
+        document.getElementById("feedback").innerHTML += "<br>Game Over";
+        document.getElementById("btnCheckAnswer").disabled = true;
+        document.getElementById("btnDisplayQuestion").disabled = true;
+    }
+}
+
+function optionSelected() {
+    // Returns the option selected
+    // -1 if no option selected
+    let optSelected = -1;
+    let optionNumber = 0;
+    let optionButtonID = "";
+    let optionButton = "";
+    while (optionNumber < 4) {
+        optionButtonID = "option" + optionNumber;
+        optionButton = document.getElementById(optionButtonID);
+        if (optionButton.checked) {
+            optSelected = optionNumber;
+            break;
+        }
+        optionNumber += 1;
+    }
+    return optSelected;
+}
+
+function checkAnswer() {
+    let userAnswerNumber = optionSelected();
+    let optionButtonID = "option" + userAnswerNumber;
+    let userAnswer = document.getElementById(optionButtonID).value;
+    let feedbackArea = document.getElementById("feedback");
+    if (userAnswer === correctAnswer) {
+        score += 1;
+        feedbackArea.innerHTML = "Correct!<br>Score = " + score;
+    } else {
+        feedbackArea.innerHTML = "Incorrect, the answer is " + correctAnswer;
+        feedbackArea.innerHTML += "<br>Score = " + score;
+    }
+    feedbackArea.innerHTML += "<br>Questions number = " + questionCount;
+    document.getElementById("btnCheckAnswer").disabled = true;
+    document.getElementById("btnDisplayQuestion").disabled = false;
+}
+
+

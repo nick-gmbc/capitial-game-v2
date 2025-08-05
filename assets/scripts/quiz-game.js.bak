@@ -1,0 +1,98 @@
+let capitals = new Array(10);
+capitals[0] = "London";
+capitals[1] = "Paris";
+capitals[2] = "Berlin";
+capitals[3] = "Riga";
+capitals[4] = "Prague";
+capitals[5] = "Madrid";
+capitals[6] = "Lisbon";
+capitals[7] = "Budapest";
+capitals[8] = "Moscow";
+capitals[9] = "Brussels";
+
+let countries = new Array(10);
+countries[0] = "UK";
+countries[1] = "France";
+countries[2] = "Germany";
+countries[3] = "Latvia";
+countries[4] = "Czech Republic";
+countries[5] = "Spain";
+countries[6] = "Portugal";
+countries[7] = "Hungary";
+countries[8] = "Russia";
+countries[9] = "Belgium";
+
+let distractors = capitals.slice();
+distractors.push("Oslo");
+distractors.push("Stockholm");
+distractors.push("Tallin");
+distractors.push("Warsaw");
+distractors.push("Copenhegen");
+
+
+let usedCapitals = [];
+
+function randomBetween(lower, upper) {
+    return Math.trunc(Math.random()*(upper - lower + 1)) + lower;
+}
+
+
+function generateQuestion() {
+    let capitalNumber = randomBetween(0, capitals.length - 1);
+    let capitalChosen = capitals[capitalNumber];
+    while (usedCapitals.includes(capitalChosen)) {
+        capitalNumber = randomBetween(0, capitals.length);
+        capitalChosen = capitals[capitalNumber];
+    }
+    let capitalAndMatchingCountry = new Array(2);
+    capitalAndMatchingCountry[0] = countries[capitalNumber];
+    capitalAndMatchingCountry[1] = capitalChosen;
+    usedCapitals.push(capitalChosen);
+    capitals.splice(capitalNumber, 1);
+    countries.splice(capitalNumber, 1);
+    return capitalAndMatchingCountry;
+}
+
+function findDistractor(correctCountry){
+     let countryNumber = randomBetween(0, distractors.length - 1);
+     while (distractors[countryNumber] === correctCountry) {
+        countryNumber = randomBetween(0, distractors.length - 1);
+     }
+     return distractors[countryNumber];
+}
+
+function generateDistractors(correctCountry) {
+    let currentDistractors = [];
+    while (currentDistractors.length !== 3) {
+        distractorAnswer = findDistractor(correctCountry);
+        if (!currentDistractors.includes(distractorAnswer)) {
+            currentDistractors.push(distractorAnswer);
+        }
+    }
+    return currentDistractors;
+}
+
+function generateQuestionAndDistractors() {
+    let questionAndAnswer = generateQuestion();
+    let question = questionAndAnswer[0];
+    let answer = questionAndAnswer[1];
+    let options = generateDistractors(answer);
+    options.push(answer);
+    console.log(options);
+    // randomise order of answers
+    //options.push(answer);
+    //console.log(options);
+    let answerList = [];
+    let chosen = 0;
+    while (options.length > 0) {
+        chosen =  randomBetween(0, options.length - 1);
+        answerList.push(options[chosen]);
+        options.splice(chosen,1);
+    }
+    console.log(answerList);
+    let questionAndAnswers = new Array(3);
+    questionAndAnswers[0] = question;
+    questionAndAnswers[1] = answer;
+    questionAndAnswers[2] = answerList;
+    return questionAndAnswers;
+}

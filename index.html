@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Capital Game</title>
+</head>
+<body>
+    <h1>Capital Quiz</h1>
+    <div id="question">
+        Question
+    </div>
+    <div>
+        <input type="radio" id="option0" name="country" value="option0">
+        <label for="option0" id="option0Label">Option 0</label><br>
+        <input type="radio" id="option1" name="country" value="option1">
+        <label for="option1" id="option1Label">Option 1</label><br>
+        <input type="radio" id="option2" name="country" value="option2">
+        <label for="option2" id="option2Label">Option 2</label><br>
+        <input type="radio" id="option3" name="country" value="option3">
+        <label for="option3" id="option3Label">Option 3</label><br>
+    </div>
+    <div>
+        <button id="btnCheckAnswer" onclick="checkAnswer()" type="button">Check Answer</button>
+        <button id="btnDisplayQuestion" onclick="displayQuestion()" type="button" disabled>Next Question</button>
+    </div>
+    <div id="feedback">
+
+    </div>
+    <script src="assets/scripts/quiz-game.js"></script>
+    <script src="assets/scripts/quiz-game-ui.js"></script>
+</body>
+</html>
