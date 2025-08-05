@@ -31,3 +31,7 @@ distractors.push("Copenhegen");
 
 let usedCapitals = [];
 
+function randomBetween(upper) {
+    return Math.trunc(Math.random() * (upper + 1)); 
+}
+
