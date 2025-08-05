@@ -53,6 +53,14 @@ function generateCountryAndCapital() {
     return countryAndMatchingCapital;
 }
 
+function generateSingleDistractor(correctCapital) {
+    let distractorNo =  randomBetween(distractors.length - 1);
+    while (distractors[distractorNo] === correctCapital) {
+        distractorNo =  randomBetween(distractors.length - 1);
+    }
+    return distractors[distractorNo];
+}
+
 function generateDistractors(correctCapital) {
     // Returns three cities that are not the correct capital
 }
